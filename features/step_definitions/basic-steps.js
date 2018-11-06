@@ -1,4 +1,8 @@
-const { Given, Then, When } = require('cucumber');
+const { After, Given, Then, When } = require('cucumber')
+
+After(async function() {
+    return await this.closeHomePage()
+})
 
 Given('I visit the site', async function() {
   // Write code here th at turns the phrase above into concrete actions
