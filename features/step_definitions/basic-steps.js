@@ -5,7 +5,6 @@ After(async function() {
 })
 
 Given('I visit the site', async function() {
-  // Write code here th at turns the phrase above into concrete actions
   return await this.openHomePage()
 })
 
@@ -14,7 +13,6 @@ Then('I should see {string}', async function(content) {
 })
 
 When('I click {string}', async function(string) {
-  // Write code here that turns the phrase above into concrete actions
   return await this.clickOnAddContactBtn()
 })
 
