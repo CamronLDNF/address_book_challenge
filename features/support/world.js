@@ -15,7 +15,7 @@ class AddressBookWorld {
   }
 
   async closeHomePage() {
-      await this.browser.close()
+    await this.browser.close()
   }
 
   async pageHasTextContent(expectedContent) {
@@ -25,16 +25,10 @@ class AddressBookWorld {
     expect(actualContent).to.be.eq(expectedContent)
   }
 
-  async clickOnAddContactBtn() {
-    const btnSelector = '.add-contact'
+  async clickOnButton(btnName) {
+    const btnSelector = this.btnSelectorFromName(btnName.toLowerCase())
     await this.page.waitForSelector(btnSelector)
     await this.page.click(btnSelector)
-  }
-
-  async clickOnButton(btnName) {
-      const btnSelector = this.btnSelectorFromName(btnName.toLowerCase())
-      await this.page.waitForSelector(btnSelector)
-      await this.page.click(btnSelector)
   }
 
   async fillFormField(field, content) {
@@ -44,27 +38,33 @@ class AddressBookWorld {
     await this.inputElement.type(content)
   }
 
-  btnSelectorFromName(btnName) {
-      switch (btnName) {
-          case 'add contact':
-            return '.add-contact'
-            break
-        case 'save contact':
-            return '.save-contact'
-            break
-        default:
-            throw `${btnName} button is not defined`
-            break
-      }
-  }
-
   async checkContactStorageCount(expectedCount) {
     const actualCount = await this.page.evaluate(
       () => JSON.parse(window.localStorage.getItem('contacts')).length
     )
     expect(actualCount).to.be.eq(expectedCount)
   }
+
+  async pageDoesNotHaveTextContent(unexpectedContent) {
+    const pageContent = await this.page.content()
+    let actualContent = pageContent.match(unexpectedContent)
+
+    expect(actualContent).to.be.eq(null)
+  }
+
+  btnSelectorFromName(btnName) {
+    switch (btnName) {
+      case 'add contact':
+        return '.add-contact'
+        break
+      case 'save contact':
+        return '.save-contact'
+        break
+      default:
+        throw `${btnName} button is not defined`
+        break
+    }
+  }
 }
 
 setWorldConstructor(AddressBookWorld)
-

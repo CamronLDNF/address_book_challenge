@@ -1,29 +1,57 @@
+const storage = window.localStorage
+
+const renderContacts = () => {
+  const contacts = JSON.parse(storage.getItem('contacts'))
+
+  let div = document.querySelector('.contact-list')
+
+  if (contacts) {
+    div.innerHTML = ''
+    const ul = document.createElement('ul')
+
+    contacts.forEach(contact => {
+      let li = document.createElement('li')
+
+      li.innerHTML = `
+        <span>${contact.name}</span> |
+        <span>${contact.email}</span> |
+        <span>${contact.phone}</span>
+      `
+      ul.appendChild(li)
+    })
+
+    div.appendChild(ul)
+  } else {
+    div.innerHTML = '<p>You have no contacts in your address book</p>'
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    const addContactForm = document.querySelector('.new-contact-form');
-    addContactForm.addEventListener('submit', event => {
-        event.preventDefault();
-        const storage = window.localStorage
+  renderContacts()
+  const contactForm = document.querySelector('.new-contact-form')
 
-        const {
-            name,
-            email,
-            phone,
-            company,
-            notes,
-            twitter,
-        } = addContactForm.elements;
+  contactForm.addEventListener('submit', event => {
+    event.preventDefault()
 
-        const contact = {
-            id: Date.now(),
-            name: name.value,
-            email: email.value,
-            phone: phone.value,
-            company: company.value,
-            notes: notes.value,
-            twitter: twitter.value
-        }
+    const { name, email, phone, company, notes, twitter } = contactForm.elements
 
-        console.log(`Saving the following contact: ${JSON.stringify(contact)}`);
-        storage.setItem('contacts', JSON.stringify([contact]))
-    });
-});
+    const contact = {
+      name: name.value,
+      email: email.value,
+      phone: phone.value,
+      company: company.value,
+      notes: notes.value,
+      twitter: twitter.value,
+    }
+
+    console.log(contact)
+
+    let contacts = JSON.parse(storage.getItem('contacts')) || []
+
+    contacts.push(contact)
+
+    storage.setItem('contacts', JSON.stringify(contacts))
+    renderContacts()
+    contactForm.reset()
+  })
+})
