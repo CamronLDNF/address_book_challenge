@@ -5,33 +5,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Subrayada" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <title>Address book</title>
 </head>
 
 <body>
-  <h1>Contacts</h1>
-  <button class="add-contact">Add contact</button>
-  
-  <div class="contact-list">
-  </div>
+  <div class="wrapper">
+    <h1 class="ff-mss text-50px text-center text-white bg-black lh-10vh w-90">&#60; Contacts &#47;&#62;</h1>
+    <button class="add-contact">Add contact</button>
 
-  <form action="#" class="new-contact-form">
-    <label for="name">Name</label>
-    <input id="contact-name" name="name" type="text">
-    <label for="email">Email</label>
-    <input id="contact-email" name="email" type="email">
-    <label for="phone">Phone</label>
-    <input id="contact-phone" name="phone" type="text">
-    <label for="company">Company</label>
-    <input id="contact-company" name="company" type="text">
-    <label for="notes">Notes</label>
-    <textarea id="contact-notes" name="notes" type="text"></textarea>
-    <label for="twitter">Twitter</label>
-    <input id="contact-twitter" name="twitter" type="text">
-    <input class="save-contact" type="submit" value="Save contact">
-</form>
+    <form action="#" class="new-contact-form h-90vh w-47 p-10 float-left">
+      <label for="name" class="uppercase leading-normal">Name</label>
+      <input id="contact-name" name="name" type="text" class="border border-black rounded block input-style">
+      <label for="email" class="uppercase leading-normal">Email</label>
+      <input id="contact-email" name="email" type="email" class="border border-black rounded block input-style">
+      <label for="phone" class="uppercase leading-normal">Phone</label>
+      <input id="contact-phone" name="phone" type="text" class="border border-black rounded block input-style">
+      <label for="company" class="uppercase leading-normal">Company</label>
+      <input id="contact-company" name="company" type="text" class="border border-black rounded block input-style">
+      <label for="notes" class="uppercase leading-normal">Notes</label>
+      <textarea id="contact-notes" name="notes" type="text" class="border border-black rounded block input-style"></textarea>
+      <label for="twitter" class="uppercase leading-normal">Twitter</label>
+      <input id="contact-twitter" name="twitter" type="text" class="border border-black rounded block input-style">
+      <input class="save-contact input-style border border-black bg-black text-white rounded cursor-pointer hover:bg-green-lightest mt-2 hover:text-black hover:border-black" type="submit" value="Save contact">
+    </form>
 
-  <script src="./dist/bundle.js"></script>
+    <div class="contact-list h-90vh w-47 float-left p-10"></div>
+    <div class="right bg-black"></div>
+</div>
+
+<script src="./dist/bundle.js"></script>
 </body>
 
 </html>

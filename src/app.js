@@ -13,9 +13,9 @@ const renderContacts = () => {
       let li = document.createElement('li')
 
       li.innerHTML = `
-        <span>${contact.name}</span> |
-        <span>${contact.email}</span> |
-        <span>${contact.phone}</span>
+        <p class="f-bold">${contact.name}</p>
+        <p class="li-fs">${contact.email}</p>
+        <p class="li-fs li-bb">${contact.phone}</p><br>
       `
       ul.appendChild(li)
     })
@@ -43,8 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
       notes: notes.value,
       twitter: twitter.value,
     }
-
-    console.log(contact)
 
     let contacts = JSON.parse(storage.getItem('contacts')) || []
 
